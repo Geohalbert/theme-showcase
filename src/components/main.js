@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import ListView from "../../views/ListView.js";
-import QuakeView from "../../views/QuakeView.js";
+import ListView from "../views/ListView.js";
+import QuakeView from "../views/QuakeView.js";
 
 function Main() {
   return (
