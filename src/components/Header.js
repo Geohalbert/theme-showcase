@@ -3,7 +3,10 @@ import React from "react";
 function Header() {
   return (
     <header>
-      <img src="../themes/images/earthquake_banner.png" alt="eq" />
+      <img
+        src="https://earthquake.usgs.gov/theme/site/earthquake/banner.png"
+        alt="eq"
+      />
     </header>
   );
 }
