@@ -1,3 +1,5 @@
+## simple react app created to demonstrate my CSS skillset
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
