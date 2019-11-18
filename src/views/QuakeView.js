@@ -9,7 +9,10 @@ class QuakeView extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.match.params.numer);
+    console.log(
+      "QuakeView did mount, this.props.match.params.number",
+      this.props.match.params.number
+    );
   }
 
   render() {

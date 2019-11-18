@@ -13,8 +13,9 @@ class ListView extends React.Component {
   }
 
   componenDidMount() {
-    this.quakeService.getQuakeList.then(response => {
-      console.log("response: ", response);
+    console.log("ListView did mount");
+    this.quakeService.getQuakeList().then(response => {
+      console.log("response: ", response.feautes);
       this.setState({ quakes: response.features });
     });
   }
