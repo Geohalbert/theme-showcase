@@ -4,9 +4,7 @@ const API_URL =
 
 class QuakeService {
   async getQuakeList(queryString) {
-    const url = `${API_URL}&starttime=${dates("yesterday")}&endtime=${dates(
-      "today"
-    )}&limit=10`;
+    const url = `${API_URL}${queryString}`;
     return axios.get(url).then(response => response.data.features);
   }
 
