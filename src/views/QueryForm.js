@@ -8,21 +8,35 @@ import "react-datepicker/dist/react-datepicker.css";
 
 class QueryForm extends React.Component {
   state = {
-    startDate: new Date()
+    startDate: new Date(),
+    endDate: new Date(),
+    count: 10
   };
 
-  handleChange = date => {
+  handleStart = date => {
+    console.log("handleStart");
     this.setState({
       startDate: date
+    });
+  };
+  handleEnd = date => {
+    console.log("handleEnd");
+    this.setState({
+      endDate: date
     });
   };
 
   render() {
     return (
-      <DatePicker
-        selected={this.state.startDate}
-        onChange={this.handleChange}
-      />
+      <form>
+        <a>Start Date:</a>
+        <DatePicker
+          selected={this.state.startDate}
+          onChange={this.handleStart}
+        />
+        <a>End Date:</a>
+        <DatePicker selected={this.state.endDate} onChange={this.handleEnd} />
+      </form>
     );
   }
 }
