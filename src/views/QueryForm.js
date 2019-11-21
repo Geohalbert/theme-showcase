@@ -21,29 +21,15 @@ class QueryForm extends React.Component {
   }
 
   handleStart = date => {
-    console.log("handleStart");
     this.setState({
       startDate: date
     });
   };
   handleEnd = date => {
-    console.log("handleEnd");
     this.setState({
       endDate: date
     });
   };
-
-  formatDate(date) {
-    let d = new Date(date),
-      month = "" + (d.getMonth() + 1),
-      day = "" + d.getDate(),
-      year = d.getFullYear();
-
-    if (month.length < 2) month = "0" + month;
-    if (day.length < 2) day = "0" + day;
-
-    return [year, month, day].join("-");
-  }
 
   convert(str) {
     var date = new Date(str),
@@ -59,14 +45,15 @@ class QueryForm extends React.Component {
     let start = `&starttime=${convertStart}`;
     let end = `&endtime=${convertEnd}`;
     let count = `&limit=${this.state.count}`;
-    return console.log(queryUrl.concat(start, end, count));
+    return queryUrl.concat(start, end, count);
   };
 
   submitQuery = () => {
     let queryParams = this.queryString();
+    console.log("queryParams: ", queryParams);
     this.quakeService.getQuakeList(queryParams).then(response => {
       console.log("response from SubmitQuery: ", response);
-      this.setState({ quakes: response.data });
+      this.setState({ quakes: response });
     });
   };
 
@@ -82,8 +69,9 @@ class QueryForm extends React.Component {
           <a>End Date:</a>
           <DatePicker selected={this.state.endDate} onChange={this.handleEnd} />
         </form>
-        {/* {this.state.quakes && <ListView props={this.state.quakes} />} */}
+        {this.state.quakes.length > 0 && <ListView props={this.state.quakes} />}
         <button onClick={this.queryString}>STRING CHECK</button>
+        <button onClick={this.submitQuery}>Submit Query</button>
       </div>
     );
   }
