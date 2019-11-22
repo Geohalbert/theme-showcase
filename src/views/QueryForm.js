@@ -4,9 +4,6 @@ import ListView from "./ListView";
 import QuakeService from "../services/QuakeService";
 import "react-datepicker/dist/react-datepicker.css";
 
-// CSS Modules, react-datepicker-cssmodules.css
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-
 class QueryForm extends React.Component {
   constructor() {
     super();
@@ -18,6 +15,7 @@ class QueryForm extends React.Component {
     };
 
     this.quakeService = new QuakeService();
+    this.handleCount = this.handleCount.bind(this);
   }
 
   handleStart = date => {
@@ -30,6 +28,11 @@ class QueryForm extends React.Component {
       endDate: date
     });
   };
+  handleCount(e) {
+    this.setState({
+      count: e.currentTarget.value
+    });
+  }
 
   convert(str) {
     var date = new Date(str),
@@ -55,9 +58,7 @@ class QueryForm extends React.Component {
 
   submitQuery = () => {
     let queryParams = this.queryString();
-    console.log("queryParams: ", queryParams);
     this.quakeService.getQuakeList(queryParams).then(response => {
-      console.log("response from SubmitQuery: ", response);
       this.setState({ quakes: response });
     });
   };
@@ -66,13 +67,20 @@ class QueryForm extends React.Component {
     return (
       <div>
         <form>
-          <a>Start Date:</a>
+          <label>Start Date:</label>
           <DatePicker
             selected={this.state.startDate}
             onChange={this.handleStart}
           />
-          <a>End Date:</a>
+          <label>End Date:</label>
           <DatePicker selected={this.state.endDate} onChange={this.handleEnd} />
+          <label>Count:</label>
+          <input
+            type="number"
+            max={100}
+            onChange={this.handleCount}
+            value={this.state.count}
+          />
         </form>
         {this.state.quakes.length > 0 && (
           <ListView quakes={this.state.quakes} />
