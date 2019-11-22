@@ -1,4 +1,5 @@
 import React from "react";
+import QuakeService from "../services/QuakeService";
 
 class QuakeView extends React.Component {
   constructor(props) {
@@ -6,21 +7,20 @@ class QuakeView extends React.Component {
     this.state = {
       quake: {}
     };
+
+    this.quakeService = new QuakeService();
   }
 
   componentDidMount() {
-    console.log(
-      "QuakeView did mount, this.props.match.params.number",
-      this.props.match.params.number
-    );
+    const quakeId = this.props.match.params.id;
+    this.quakeService.getQuake(quakeId).then(response => {
+      this.setState({ quake: response });
+    });
   }
 
   render() {
-    return (
-      <div>
-        <h3>Quake:</h3>
-      </div>
-    );
+    const quake = this.state.quake;
+    return <div>Quake {quake.id}</div>;
   }
 }
 

@@ -8,7 +8,7 @@ function Main() {
     <main>
       <Switch>
         <Route exact path="/" component={QueryForm} />
-        <Route path="/quakes/quake:id" component={QuakeView} />
+        <Route path="/quake/:id" component={QuakeView} />
       </Switch>
     </main>
   );
