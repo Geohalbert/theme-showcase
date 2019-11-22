@@ -85,10 +85,6 @@ class QueryForm extends React.Component {
         {this.state.quakes.length > 0 && (
           <ListView quakes={this.state.quakes} />
         )}
-        <button onClick={this.stringCheck}>STRING CHECK</button>
-        <button onClick={console.log("state check: ", this.state)}>
-          STATE CHECK
-        </button>
         <button onClick={this.submitQuery}>Submit Query</button>
       </div>
     );
