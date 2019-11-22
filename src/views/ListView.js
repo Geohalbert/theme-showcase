@@ -1,27 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import QuakeService from "../services/QuakeService";
 
 class ListView extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      quakes: []
-    };
-
-    this.quakeService = new QuakeService();
+  constructor(props) {
+    super(props);
   }
 
-  componenDidMount() {
-    console.log("ListView did mount");
-    this.quakeService.getQuakeList().then(response => {
-      console.log("response: ", response.feautes);
-      this.setState({ quakes: response.features });
-    });
-  }
+  componenDidMount() {}
 
   renderQuakes = () => {
-    return this.state.quakes.map((quake, key) => {
+    return this.props.quakes.map((quake, key) => {
       return (
         <li key={key}>
           <Link to={`/quake/${quake.id}`}>Quake {quake.id}</Link>

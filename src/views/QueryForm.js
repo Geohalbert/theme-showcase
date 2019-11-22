@@ -48,6 +48,11 @@ class QueryForm extends React.Component {
     return queryUrl.concat(start, end, count);
   };
 
+  stringCheck = () => {
+    let result = this.queryString();
+    console.log("string check: ", result);
+  };
+
   submitQuery = () => {
     let queryParams = this.queryString();
     console.log("queryParams: ", queryParams);
@@ -69,8 +74,13 @@ class QueryForm extends React.Component {
           <a>End Date:</a>
           <DatePicker selected={this.state.endDate} onChange={this.handleEnd} />
         </form>
-        {this.state.quakes.length > 0 && <ListView props={this.state.quakes} />}
-        <button onClick={this.queryString}>STRING CHECK</button>
+        {this.state.quakes.length > 0 && (
+          <ListView quakes={this.state.quakes} />
+        )}
+        <button onClick={this.stringCheck}>STRING CHECK</button>
+        <button onClick={console.log("state check: ", this.state)}>
+          STATE CHECK
+        </button>
         <button onClick={this.submitQuery}>Submit Query</button>
       </div>
     );
