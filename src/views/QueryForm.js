@@ -8,7 +8,7 @@ class QueryForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      startDate: new Date(),
+      startDate: new Date().setDate(new Date().getDate() - 1),
       endDate: new Date(),
       count: 10,
       quakes: []
