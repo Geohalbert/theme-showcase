@@ -16,11 +16,10 @@ class QuakeView extends React.Component {
   componentDidMount() {
     const quakeId = this.props.match.params.id;
     this.quakeService.getQuake(quakeId).then(response => {
-      console.log("quake properties: ", response.properties);
       this.setState({
         quakeId: response.id,
         properties: response.properties,
-        coordinates: response.geometry.coor
+        coordinates: response.geometry.coordinates
       });
     });
   }

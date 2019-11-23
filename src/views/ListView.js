@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 class ListView extends React.Component {
-  componenDidMount() {}
-
   renderQuakes = () => {
     return this.props.quakes.map((quake, key) => {
       return (
