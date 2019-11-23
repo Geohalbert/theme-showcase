@@ -50,6 +50,21 @@ class QueryForm extends React.Component {
     return [date.getFullYear(), mnth, day].join("-");
   }
 
+  resetParams = () => {
+    this.setState({
+      loading: false,
+      starttime: new Date().setDate(new Date().getDate() - 1),
+      endtime: new Date(),
+      minmagnitude: null,
+      maxmagnitude: null,
+      maxdepth: null,
+      mindepth: null,
+      orderby: "time",
+      limit: 10,
+      quakes: []
+    });
+  };
+
   queryString = () => {
     let state = this.state;
     this.setState({ loading: true });
@@ -127,6 +142,7 @@ class QueryForm extends React.Component {
           <ListView quakes={this.state.quakes} />
         )}
         <button onClick={this.submitQuery}>Submit Query</button>
+        <button onClick={this.resetParams}>Reset Params</button>
         {/* <button onClick={this.stringCheck}>String Check </button> */}
       </div>
     );
