@@ -13,6 +13,8 @@ class QueryForm extends React.Component {
       endtime: new Date(),
       minmagnitude: null,
       maxmagnitude: null,
+      maxdepth: null,
+      mindepth: null,
       orderby: "time",
       limit: 10,
       quakes: []
@@ -24,6 +26,7 @@ class QueryForm extends React.Component {
 
   // TO DO:
   // drop down menu for orderby
+  // min and max depth
   // loading text/animation while retrieving data (setState loading etc)
   // A count for total quakes received
   // an alert/message if no results are found
