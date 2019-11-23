@@ -30,8 +30,7 @@ class QueryForm extends React.Component {
 
   // TO DO:
   // drop down menu for orderby
-  // min and max depth
-  // reset query button
+  // add classNames/id's for divs
 
   handleStart = date => {
     this.setState({
