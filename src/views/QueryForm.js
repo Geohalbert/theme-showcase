@@ -8,29 +8,32 @@ class QueryForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      startDate: new Date().setDate(new Date().getDate() - 1),
-      endDate: new Date(),
-      count: 10,
+      starttime: new Date().setDate(new Date().getDate() - 1),
+      endtime: new Date(),
+      minmagnitude: null,
+      maxmagnitude: null,
+      orderby: "time",
+      limit: 10,
       quakes: []
     };
 
     this.quakeService = new QuakeService();
-    this.handleCount = this.handleCount.bind(this);
+    this.handleLimit = this.handleLimit.bind(this);
   }
 
   handleStart = date => {
     this.setState({
-      startDate: date
+      starttime: date
     });
   };
   handleEnd = date => {
     this.setState({
-      endDate: date
+      endtime: date
     });
   };
-  handleCount(e) {
+  handleLimit(e) {
     this.setState({
-      count: e.currentTarget.value
+      limit: e.currentTarget.value
     });
   }
 
@@ -42,13 +45,24 @@ class QueryForm extends React.Component {
   }
 
   queryString = () => {
-    let queryUrl = "";
-    let convertStart = this.convert(this.state.startDate);
-    let convertEnd = this.convert(this.state.endDate);
+    let state = this.state;
+    let convertStart = this.convert(this.state.starttime);
+    let convertEnd = this.convert(this.state.endtime);
     let start = `&starttime=${convertStart}`;
     let end = `&endtime=${convertEnd}`;
-    let count = `&limit=${this.state.count}`;
-    return queryUrl.concat(start, end, count);
+    let params = [start, end];
+    Object.keys(state).forEach((key, index) => {
+      if (
+        state[key] != null &&
+        key !== "starttime" &&
+        key !== "endtime" &&
+        key !== "quakes"
+      ) {
+        params.push(`&${key}=${state[key]}`);
+      }
+    });
+    let queryUrl = params.join("");
+    return queryUrl;
   };
 
   stringCheck = () => {
@@ -69,23 +83,24 @@ class QueryForm extends React.Component {
         <form>
           <label>Start Date:</label>
           <DatePicker
-            selected={this.state.startDate}
+            selected={this.state.starttime}
             onChange={this.handleStart}
           />
           <label>End Date:</label>
-          <DatePicker selected={this.state.endDate} onChange={this.handleEnd} />
-          <label>Count:</label>
+          <DatePicker selected={this.state.endtime} onChange={this.handleEnd} />
+          <label>Limit:</label>
           <input
             type="number"
             max={100}
-            onChange={this.handleCount}
-            value={this.state.count}
+            onChange={this.handleLimit}
+            value={this.state.limit}
           />
         </form>
         {this.state.quakes.length > 0 && (
           <ListView quakes={this.state.quakes} />
         )}
         <button onClick={this.submitQuery}>Submit Query</button>
+        {/* <button onClick={this.stringCheck}>String Check </button> */}
       </div>
     );
   }
