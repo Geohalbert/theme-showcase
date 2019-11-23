@@ -65,8 +65,7 @@ class QueryForm extends React.Component {
         params.push(`&${key}=${state[key]}`);
       }
     });
-    let queryUrl = params.join("");
-    return queryUrl;
+    return params.join("");
   };
 
   stringCheck = () => {

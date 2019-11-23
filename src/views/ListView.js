@@ -18,6 +18,7 @@ class ListView extends React.Component {
     return (
       <div>
         <ul>{this.renderQuakes()}</ul>
+        <div>Total earthquakes: {this.props.quakes.length}</div>
       </div>
     );
   }
