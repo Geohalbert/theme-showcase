@@ -13,6 +13,10 @@ class QueryForm extends React.Component {
       endtime: new Date(),
       minmagnitude: null,
       maxmagnitude: null,
+      minlatitude: null,
+      maxlatitude: null,
+      minlongitude: null,
+      maxlongitude: null,
       maxdepth: null,
       mindepth: null,
       orderby: "time",
@@ -68,10 +72,8 @@ class QueryForm extends React.Component {
   queryString = () => {
     let state = this.state;
     this.setState({ loading: true });
-    let convertStart = this.convert(this.state.starttime);
-    let convertEnd = this.convert(this.state.endtime);
-    let start = `&starttime=${convertStart}`;
-    let end = `&endtime=${convertEnd}`;
+    let start = `&starttime=${this.convert(state.starttime)}`;
+    let end = `&endtime=${this.convert(state.endtime)}`;
     let params = [start, end];
     let ignore = ["starttime", "endtime", "quakes", "loading"];
     Object.keys(state).forEach((key, index) => {
@@ -94,7 +96,7 @@ class QueryForm extends React.Component {
         this.setState({ quakes: response, loading: false });
       } else {
         this.setState({ loading: false });
-        alert("No results that match your criteria");
+        alert("No results match your criteria");
       }
     });
   };
@@ -134,6 +136,38 @@ class QueryForm extends React.Component {
             min={0}
             max={10}
             name="maxmagnitude"
+            onChange={this.handleChange}
+          />
+          <label>Min Latitude:</label>
+          <input
+            type="number"
+            min={-90}
+            max={90}
+            name="minlatitude"
+            onChange={this.handleChange}
+          />
+          <label>Max Latitude:</label>
+          <input
+            type="number"
+            min={-90}
+            max={90}
+            name="maxlatitude"
+            onChange={this.handleChange}
+          />
+          <label>Min Longitude:</label>
+          <input
+            type="number"
+            min={-360}
+            max={360}
+            name="minlongitude"
+            onChange={this.handleChange}
+          />
+          <label>Max Longitude:</label>
+          <input
+            type="number"
+            min={-360}
+            max={360}
+            name="maxlongitude"
             onChange={this.handleChange}
           />
         </form>
