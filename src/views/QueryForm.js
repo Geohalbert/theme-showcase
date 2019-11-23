@@ -27,9 +27,6 @@ class QueryForm extends React.Component {
   // TO DO:
   // drop down menu for orderby
   // min and max depth
-  // loading text/animation while retrieving data (setState loading etc)
-  // A count for total quakes received
-  // an alert/message if no results are found
 
   handleStart = date => {
     this.setState({
@@ -54,6 +51,7 @@ class QueryForm extends React.Component {
 
   queryString = () => {
     let state = this.state;
+    this.setState({ loading: true });
     let convertStart = this.convert(this.state.starttime);
     let convertEnd = this.convert(this.state.endtime);
     let start = `&starttime=${convertStart}`;
@@ -76,7 +74,12 @@ class QueryForm extends React.Component {
   submitQuery = () => {
     let queryParams = this.queryString();
     this.quakeService.getQuakeList(queryParams).then(response => {
-      this.setState({ quakes: response });
+      if (response.length > 0) {
+        this.setState({ quakes: response, loading: false });
+      } else {
+        this.setState({ loading: false });
+        alert("No results that match your criteria");
+      }
     });
   };
 
@@ -94,6 +97,7 @@ class QueryForm extends React.Component {
           <label>Limit:</label>
           <input
             type="number"
+            min={1}
             max={100}
             name="limit"
             onChange={this.handleChange}
@@ -104,17 +108,20 @@ class QueryForm extends React.Component {
           <input
             type="number"
             min={0}
+            max={10}
             name="minmagnitude"
             onChange={this.handleChange}
           />
           <label>Maximum Magnitude:</label>
           <input
             type="number"
+            min={0}
             max={10}
             name="maxmagnitude"
             onChange={this.handleChange}
           />
         </form>
+        {this.state.loading && <div>GATHERING DATA</div>}
         {this.state.quakes.length > 0 && (
           <ListView quakes={this.state.quakes} />
         )}
