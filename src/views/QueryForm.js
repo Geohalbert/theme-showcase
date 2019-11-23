@@ -8,6 +8,7 @@ class QueryForm extends React.Component {
   constructor() {
     super();
     this.state = {
+      loading: false,
       starttime: new Date().setDate(new Date().getDate() - 1),
       endtime: new Date(),
       minmagnitude: null,
@@ -18,8 +19,14 @@ class QueryForm extends React.Component {
     };
 
     this.quakeService = new QuakeService();
-    this.handleLimit = this.handleLimit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
+
+  // TO DO:
+  // drop down menu for orderby
+  // loading text/animation while retrieving data (setState loading etc)
+  // A count for total quakes received
+  // an alert/message if no results are found
 
   handleStart = date => {
     this.setState({
@@ -31,10 +38,8 @@ class QueryForm extends React.Component {
       endtime: date
     });
   };
-  handleLimit(e) {
-    this.setState({
-      limit: e.currentTarget.value
-    });
+  handleChange(evt) {
+    this.setState({ [evt.target.name]: evt.target.value });
   }
 
   convert(str) {
@@ -51,13 +56,9 @@ class QueryForm extends React.Component {
     let start = `&starttime=${convertStart}`;
     let end = `&endtime=${convertEnd}`;
     let params = [start, end];
+    let ignore = ["starttime", "endtime", "quakes", "loading"];
     Object.keys(state).forEach((key, index) => {
-      if (
-        state[key] != null &&
-        key !== "starttime" &&
-        key !== "endtime" &&
-        key !== "quakes"
-      ) {
+      if (state[key] != null && !ignore.includes(key)) {
         params.push(`&${key}=${state[key]}`);
       }
     });
@@ -92,8 +93,24 @@ class QueryForm extends React.Component {
           <input
             type="number"
             max={100}
-            onChange={this.handleLimit}
+            name="limit"
+            onChange={this.handleChange}
             value={this.state.limit}
+            placeholder="maximum: 100"
+          />
+          <label>Minimum Magnitude:</label>
+          <input
+            type="number"
+            min={0}
+            name="minmagnitude"
+            onChange={this.handleChange}
+          />
+          <label>Maximum Magnitude:</label>
+          <input
+            type="number"
+            max={10}
+            name="maxmagnitude"
+            onChange={this.handleChange}
           />
         </form>
         {this.state.quakes.length > 0 && (
