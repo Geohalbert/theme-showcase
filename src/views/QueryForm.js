@@ -30,7 +30,7 @@ class QueryForm extends React.Component {
   }
 
   // TO DO:
-  // drop down menu for orderby
+  // Figure out why number inputs wont clear with null
   // add classNames/id's for divs
 
   handleStart = date => {
@@ -101,7 +101,7 @@ class QueryForm extends React.Component {
           />
           <label>End Date:</label>
           <DatePicker selected={this.state.endtime} onChange={this.handleEnd} />
-          <label>Limit:</label>
+          <label>Limit (100 max):</label>
           <input
             type="number"
             min={1}
@@ -183,8 +183,12 @@ class QueryForm extends React.Component {
         {this.state.quakes.length > 0 && (
           <ListView quakes={this.state.quakes} />
         )}
-        <button onClick={this.submitQuery}>Submit Query</button>
-        <button onClick={this.resetParams}>Reset Params</button>
+        <button onClick={this.submitQuery} id="submitButton">
+          Submit Query
+        </button>
+        <button onClick={this.resetParams} id="resetParams">
+          Reset Params
+        </button>
         {/* <button onClick={this.stringCheck}>String Check </button> */}
       </div>
     );

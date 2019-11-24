@@ -5,9 +5,9 @@ class ListView extends React.Component {
   renderQuakes = () => {
     return this.props.quakes.map((quake, key) => {
       return (
-        <li key={key}>
+        <div key={key} className="quakeLink">
           <Link to={`/quake/${quake.id}`}>Quake {quake.id}</Link>
-        </li>
+        </div>
       );
     });
   };
@@ -15,8 +15,8 @@ class ListView extends React.Component {
   render() {
     return (
       <div>
-        <ul>{this.renderQuakes()}</ul>
-        <div>Total earthquakes: {this.props.quakes.length}</div>
+        <div id="quakeList">{this.renderQuakes()}</div>
+        <div id="quakeCount">Total earthquakes: {this.props.quakes.length}</div>
       </div>
     );
   }

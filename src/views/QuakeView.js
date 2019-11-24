@@ -29,11 +29,11 @@ class QuakeView extends React.Component {
     return (
       <div>
         <div className="viewQuake">Quake {quakeId}</div>
-        <div className="quake-properties">
-          <div>Place: {properties.place}</div>
-          <div>Coordinates: {coordinates}</div>
-          <div>Magnitude: {properties.mag}</div>
-          <div>Time: {properties.time}</div>
+        <div className="quake-details">
+          <div className="quake-property">Place: {properties.place}</div>
+          <div className="quake-property">Coordinates: {coordinates}</div>
+          <div className="quake-property">Magnitude: {properties.mag}</div>
+          <div className="quake-property">Time: {properties.time}</div>
         </div>
       </div>
     );
