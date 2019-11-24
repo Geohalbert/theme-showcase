@@ -26,6 +26,7 @@ class QueryForm extends React.Component {
 
     this.quakeService = new QuakeService();
     this.handleChange = this.handleChange.bind(this);
+    this.baseState = this.state;
   }
 
   // TO DO:
@@ -54,18 +55,7 @@ class QueryForm extends React.Component {
   }
 
   resetParams = () => {
-    this.setState({
-      loading: false,
-      starttime: new Date().setDate(new Date().getDate() - 1),
-      endtime: new Date(),
-      minmagnitude: null,
-      maxmagnitude: null,
-      maxdepth: null,
-      mindepth: null,
-      orderby: "time",
-      limit: 10,
-      quakes: []
-    });
+    this.setState(this.baseState);
   };
 
   queryString = () => {
@@ -94,7 +84,7 @@ class QueryForm extends React.Component {
       if (response.length > 0) {
         this.setState({ quakes: response, loading: false });
       } else {
-        this.setState({ loading: false });
+        this.setState({ quakes: [], loading: false });
         alert("No results match your criteria");
       }
     });
@@ -169,6 +159,19 @@ class QueryForm extends React.Component {
             name="maxlongitude"
             onChange={this.handleChange}
           />
+          <label>
+            Sort by:
+            <select
+              value={this.state.orderby}
+              name="orderby"
+              onChange={this.handleChange}
+            >
+              <option value="time">Time - descending</option>
+              <option value="time-asc">Time - ascending</option>
+              <option value="magnitude">Magnitude - descending</option>
+              <option value="magnitude-asc">Mangitude - ascending</option>
+            </select>
+          </label>
         </form>
         {this.state.loading && <div>GATHERING DATA</div>}
         {this.state.quakes.length > 0 && (
