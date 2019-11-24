@@ -117,6 +117,7 @@ class QueryForm extends React.Component {
             min={0}
             max={10}
             name="minmagnitude"
+            value={this.state.minmagnitude}
             onChange={this.handleChange}
           />
           <label>Maximum Magnitude:</label>
@@ -125,6 +126,7 @@ class QueryForm extends React.Component {
             min={0}
             max={10}
             name="maxmagnitude"
+            value={this.state.maxmagnitude}
             onChange={this.handleChange}
           />
           <label>Min Latitude:</label>
@@ -133,6 +135,7 @@ class QueryForm extends React.Component {
             min={-90}
             max={90}
             name="minlatitude"
+            value={this.state.minlatitude}
             onChange={this.handleChange}
           />
           <label>Max Latitude:</label>
@@ -141,6 +144,7 @@ class QueryForm extends React.Component {
             min={-90}
             max={90}
             name="maxlatitude"
+            value={this.state.maxlatitude}
             onChange={this.handleChange}
           />
           <label>Min Longitude:</label>
@@ -149,6 +153,7 @@ class QueryForm extends React.Component {
             min={-360}
             max={360}
             name="minlongitude"
+            value={this.state.minlongitude}
             onChange={this.handleChange}
           />
           <label>Max Longitude:</label>
@@ -157,6 +162,7 @@ class QueryForm extends React.Component {
             min={-360}
             max={360}
             name="maxlongitude"
+            value={this.state.maxlongitude}
             onChange={this.handleChange}
           />
           <label>
