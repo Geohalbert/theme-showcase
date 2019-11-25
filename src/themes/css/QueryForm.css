@@ -1,0 +1,9 @@
+#queryForm {
+    margin: auto;
+    width: 1000px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

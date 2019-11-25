@@ -1,6 +1,7 @@
 import React from "react";
 import DatePicker from "react-datepicker";
 import ListView from "./ListView";
+import "../themes/css/QueryForm.css";
 import QuakeService from "../services/QuakeService";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -28,10 +29,6 @@ class QueryForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.baseState = this.state;
   }
-
-  // TO DO:
-  // Figure out why number inputs wont clear with null
-  // add classNames/id's for divs
 
   handleStart = date => {
     this.setState({
@@ -73,11 +70,6 @@ class QueryForm extends React.Component {
     return params.join("");
   };
 
-  stringCheck = () => {
-    let result = this.queryString();
-    console.log("string check: ", result);
-  };
-
   submitQuery = () => {
     let queryParams = this.queryString();
     this.quakeService.getQuakeList(queryParams).then(response => {
@@ -92,79 +84,87 @@ class QueryForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="queryForm">
+        <h1>Enter Parameters for earthquake data</h1>
         <form>
-          <label>Start Date:</label>
-          <DatePicker
-            selected={this.state.starttime}
-            onChange={this.handleStart}
-          />
-          <label>End Date:</label>
-          <DatePicker selected={this.state.endtime} onChange={this.handleEnd} />
-          <label>Limit (100 max):</label>
-          <input
-            type="number"
-            min={1}
-            max={100}
-            name="limit"
-            onChange={this.handleChange}
-            value={this.state.limit}
-            placeholder="maximum: 100"
-          />
-          <label>Minimum Magnitude:</label>
-          <input
-            type="number"
-            min={0}
-            max={10}
-            name="minmagnitude"
-            value={this.state.minmagnitude}
-            onChange={this.handleChange}
-          />
-          <label>Maximum Magnitude:</label>
-          <input
-            type="number"
-            min={0}
-            max={10}
-            name="maxmagnitude"
-            value={this.state.maxmagnitude}
-            onChange={this.handleChange}
-          />
-          <label>Min Latitude:</label>
-          <input
-            type="number"
-            min={-90}
-            max={90}
-            name="minlatitude"
-            value={this.state.minlatitude}
-            onChange={this.handleChange}
-          />
-          <label>Max Latitude:</label>
-          <input
-            type="number"
-            min={-90}
-            max={90}
-            name="maxlatitude"
-            value={this.state.maxlatitude}
-            onChange={this.handleChange}
-          />
-          <label>Min Longitude:</label>
-          <input
-            type="number"
-            min={-360}
-            max={360}
-            name="minlongitude"
-            value={this.state.minlongitude}
-            onChange={this.handleChange}
-          />
-          <label>Max Longitude:</label>
-          <input
-            type="number"
-            min={-360}
-            max={360}
-            name="maxlongitude"
-            value={this.state.maxlongitude}
-            onChange={this.handleChange}
-          />
+          <div className="queryRow">
+            <label>Start Date:</label>
+            <DatePicker
+              selected={this.state.starttime}
+              onChange={this.handleStart}
+            />
+            <label>End Date:</label>
+            <DatePicker
+              selected={this.state.endtime}
+              onChange={this.handleEnd}
+            />
+            <label>Limit (100 max):</label>
+            <input
+              type="number"
+              min={1}
+              max={100}
+              name="limit"
+              onChange={this.handleChange}
+              value={this.state.limit}
+              placeholder="maximum: 100"
+            />
+          </div>
+          <div className="queryRow">
+            <label>Minimum Magnitude:</label>
+            <input
+              type="number"
+              min={0}
+              max={10}
+              name="minmagnitude"
+              value={this.state.minmagnitude}
+              onChange={this.handleChange}
+            />
+            <label>Maximum Magnitude:</label>
+            <input
+              type="number"
+              min={0}
+              max={10}
+              name="maxmagnitude"
+              value={this.state.maxmagnitude}
+              onChange={this.handleChange}
+            />
+            <label>Min Latitude:</label>
+            <input
+              type="number"
+              min={-90}
+              max={90}
+              name="minlatitude"
+              value={this.state.minlatitude}
+              onChange={this.handleChange}
+            />
+            <label>Max Latitude:</label>
+            <input
+              type="number"
+              min={-90}
+              max={90}
+              name="maxlatitude"
+              value={this.state.maxlatitude}
+              onChange={this.handleChange}
+            />
+            <label>Min Longitude:</label>
+            <input
+              type="number"
+              min={-360}
+              max={360}
+              name="minlongitude"
+              value={this.state.minlongitude}
+              onChange={this.handleChange}
+            />
+            <label>Max Longitude:</label>
+            <input
+              type="number"
+              min={-360}
+              max={360}
+              name="maxlongitude"
+              value={this.state.maxlongitude}
+              onChange={this.handleChange}
+            />
+          </div>
           <label>
             Sort by:
             <select
@@ -189,7 +189,6 @@ class QueryForm extends React.Component {
         <button onClick={this.resetParams} id="resetParams">
           Reset Params
         </button>
-        {/* <button onClick={this.stringCheck}>String Check </button> */}
       </div>
     );
   }
