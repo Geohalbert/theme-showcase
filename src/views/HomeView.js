@@ -14,8 +14,8 @@ function HomeView() {
         <br />
         <br />
         <h3>
-          To get started without creating a user profile, click
-          <Link to={`/query`}>Here</Link>{" "}
+          To get started without creating a user profile, click{" "}
+          <Link to={`/query`}>Here</Link>
         </h3>
       </div>
     </div>
