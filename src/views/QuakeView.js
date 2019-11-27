@@ -1,6 +1,7 @@
 import React from "react";
 import QuakeService from "../services/QuakeService";
 import "../themes/css/QueryForm.css";
+import SimpleMap from "../components/map.js";
 
 class QuakeView extends React.Component {
   constructor(props) {
@@ -25,6 +26,14 @@ class QuakeView extends React.Component {
     });
   }
 
+  coorObj(arr) {
+    let obj = {
+      lat: arr[0],
+      lng: arr[1]
+    };
+    return obj;
+  }
+
   render() {
     const { quakeId, properties, coordinates } = this.state;
     const convertTime = new Date(properties.time).toLocaleString();
@@ -38,7 +47,8 @@ class QuakeView extends React.Component {
           <div className="quake-property">Magnitude: {properties.mag}</div>
           <div className="quake-property">Time: {convertTime}</div>
         </div>
-        {/* {coordinates && <GoogleMap coordinates={coordinates} />} */}
+        {/* for now Im just forcing SimpleMap to display */}
+        {coordinates && <SimpleMap lat={coordinates[0]} lng={coordinates[1]} />}
       </div>
     );
   }

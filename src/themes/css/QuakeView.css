@@ -1,0 +1,5 @@
+/* based on magnitude, the text should shimmy and try integrating color like borders, background and text */
+#map {
+    height: 200px;
+    width: 350px;
+}
