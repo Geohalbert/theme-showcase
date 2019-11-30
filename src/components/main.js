@@ -10,7 +10,7 @@ function Main() {
       <Switch>
         <Route exact path="/" component={HomeView} />
         <Route exact path="/query" component={QueryForm} />
-        <Route path="/quake/:id" component={QuakeView} />
+        <Route path="/query/:id" component={QuakeView} />
       </Switch>
     </main>
   );

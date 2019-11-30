@@ -6,7 +6,7 @@ class ListView extends React.Component {
     return this.props.quakes.map((quake, key) => {
       return (
         <div key={key} className="quakeLink">
-          <Link to={`/quake/${quake.id}`}>Quake {quake.id}</Link>
+          <Link to={`/query/${quake.id}`}>Quake {quake.id}</Link>
         </div>
       );
     });
