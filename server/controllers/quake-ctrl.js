@@ -1,6 +1,6 @@
 const Quake = require("../models/quake-model");
 
-createQuake = (req, res) => {
+const createQuake = (req, res) => {
   const body = req.body;
 
   if (!body) {
@@ -33,7 +33,7 @@ createQuake = (req, res) => {
     });
 };
 
-updateQuake = async (req, res) => {
+const updateQuake = async (req, res) => {
   const body = req.body;
 
   if (!body) {
@@ -51,8 +51,8 @@ updateQuake = async (req, res) => {
       });
     }
     quake.name = body.name;
-    quake.properties = body.properties;
-    quake.coordinates = body.coordinates;
+    quake.mag = body.mag;
+    // quake.coordinates = body.coordinates;
     quake
       .save()
       .then(() => {
@@ -71,7 +71,7 @@ updateQuake = async (req, res) => {
   });
 };
 
-deleteQuake = async (req, res) => {
+const deleteQuake = async (req, res) => {
   await Quake.findOneAndDelete({ _id: req.params.id }, (err, quake) => {
     if (err) {
       return res.status(400).json({ success: false, error: err });
@@ -85,7 +85,7 @@ deleteQuake = async (req, res) => {
   }).catch(err => console.log(err));
 };
 
-getQuakeById = async (req, res) => {
+const getQuakeById = async (req, res) => {
   await Quake.findOne({ _id: req.params.id }, (err, quake) => {
     if (err) {
       return res.status(400).json({ success: false, error: err });
@@ -98,7 +98,7 @@ getQuakeById = async (req, res) => {
   }).catch(err => console.log(err));
 };
 
-getQuakes = async (req, res) => {
+const getQuakes = async (req, res) => {
   await Quake.find({}, (err, quakes) => {
     if (err) {
       return res.status(400).json({ success: false, error: err });
